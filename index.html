@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interns at Hammad Technologies – ProjectHelper</title>
+  <meta name="description" content="Premium academic discovery platform for browsing Nigerian universities, faculties, departments, and research topics." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <style>
+    :root{
+      --brand:#1f5eff;
+      --brand-2:#1447c9;
+      --brand-3:#0d3aa8;
+      --accent:#18b7a0;
+      --hero-1:#eef4ff;
+      --hero-2:#f9fbff;
+      --hero-dark-1:#0a1020;
+      --hero-dark-2:#11192d;
+      --text-dark:#0f172a;
+      --muted:#64748b;
+      --radius:1.15rem;
+      --radius-lg:1.5rem;
+      --shadow-sm:0 8px 24px rgba(15,23,42,.06);
+      --shadow-md:0 14px 34px rgba(15,23,42,.10);
+      --shadow-lg:0 20px 50px rgba(15,23,42,.16);
+      --glass-light:rgba(255,255,255,.78);
+      --glass-dark:rgba(15,23,42,.35);
+      --border-soft:rgba(148,163,184,.18);
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      background:var(--bs-body-bg);
+      color:var(--bs-body-color);
+      text-rendering:optimizeLegibility;
+    }
+
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:1100;
+      backdrop-filter:blur(16px);
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .navbar-brand{
+      font-size:.98rem;
+      max-width:340px;
+      line-height:1.25;
+      white-space:normal;
+    }
+
+    .nav-link{
+      font-weight:500;
+      position:relative;
+      transition:.18s ease;
+    }
+
+    .nav-link:hover{opacity:.9;transform:translateY(-1px)}
+    .nav-link.active{
+      color:#fff!important;
+    }
+    .nav-link.active::after{
+      content:"";
+      position:absolute;
+      left:.75rem;
+      right:.75rem;
+      bottom:.25rem;
+      height:2px;
+      background:#fff;
+      border-radius:999px;
+    }
+
+    .section{display:none;padding:42px 0}
+    .section.active{display:block}
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:92px 0 84px;
+      background:
+        radial-gradient(circle at top left, rgba(31,94,255,.15), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(24,183,160,.12), transparent 28%),
+        linear-gradient(180deg,var(--hero-1) 0%,var(--hero-2) 100%);
+      border-bottom:1px solid var(--bs-border-color);
+    }
+
+    html[data-bs-theme="dark"] .hero{
+      background:
+        radial-gradient(circle at top left, rgba(31,94,255,.16), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(24,183,160,.14), transparent 28%),
+        linear-gradient(180deg,var(--hero-dark-1) 0%,var(--hero-dark-2) 100%);
+    }
+
+    .hero-badge{
+      border:1px solid rgba(31,94,255,.2);
+      background:rgba(31,94,255,.08);
+      color:var(--brand);
+      padding:.45rem .8rem;
+      border-radius:999px;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+    }
+
+    .hero-title{
+      font-size:clamp(2rem,4vw,3.25rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    .hero-lead{
+      font-size:1.05rem;
+      max-width:760px;
+    }
+
+    .card{
+      border:1px solid var(--bs-border-color);
+      box-shadow:var(--shadow-sm);
+      background:var(--bs-body-bg);
+      border-radius:var(--radius);
+    }
+
+    .premium-card,
+    .topic-card,
+    .feature-card,
+    .mini-card,
+    .stats-card,
+    .section-tile{
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .premium-card:hover,
+    .topic-card:hover,
+    .feature-card:hover,
+    .mini-card:hover,
+    .stats-card:hover,
+    .section-tile:hover{
+      transform:translateY(-6px);
+      box-shadow:var(--shadow-lg);
+      border-color:rgba(31,94,255,.18);
+    }
+
+    .glass-card{
+      background:var(--glass-light);
+      border:1px solid rgba(255,255,255,.45);
+      backdrop-filter:blur(16px);
+      box-shadow:var(--shadow-md);
+    }
+
+    html[data-bs-theme="dark"] .glass-card{
+      background:var(--glass-dark);
+      border-color:rgba(148,163,184,.15);
+    }
+
+    .muted{color:var(--bs-secondary-color)!important}
+
+    .text-secondary,
+    .text-muted{
+      line-height:1.7;
+    }
+
+    .search-wrap{
+      position:relative;
+    }
+
+    .search-suggest{
+      position:absolute;
+      z-index:1200;
+      width:100%;
+      margin-top:.45rem;
+      background:var(--bs-body-bg);
+      border:1px solid var(--bs-border-color);
+      border-radius:1rem;
+      max-height:300px;
+      overflow:auto;
+      box-shadow:0 20px 40px rgba(15,23,42,.14);
+    }
+
+    .suggestion{
+      transition:.16s ease;
+      border-bottom:1px solid rgba(148,163,184,.08);
+    }
+
+    .suggestion:last-child{border-bottom:none}
+
+    .suggestion:hover,.suggestion:focus{
+      background:rgba(13,110,253,.08);
+      outline:none;
+    }
+
+    .skeleton{
+      height:120px;
+      background:linear-gradient(90deg,#e9ecef,#f8f9fa,#e9ecef);
+      background-size:200px 100%;
+      border-radius:12px;
+      animation:shine 1s linear infinite;
+    }
+
+    html[data-bs-theme="dark"] .skeleton{
+      background:linear-gradient(90deg,#1f2937,#334155,#1f2937);
+      background-size:200px 100%;
+    }
+
+    @keyframes shine{
+      0%{background-position:-200px 0}
+      100%{background-position:200px 0}
+    }
+
+    #topBtn{
+      position:fixed;
+      right:20px;
+      bottom:24px;
+      display:none;
+      z-index:1200;
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      box-shadow:var(--shadow-md);
+    }
+
+    .stats-box,
+    .filter-panel,
+    .contact-box{
+      border-radius:1.15rem;
+      padding:1.15rem;
+      background:var(--bs-tertiary-bg);
+      border:1px solid var(--bs-border-color);
+    }
+
+    .stats-box h3{
+      font-size:1.65rem;
+      font-weight:800;
+      letter-spacing:-.03em;
+    }
+
+    .hero-stat{
+      display:inline-flex;
+      gap:.55rem;
+      align-items:center;
+      padding:.7rem 1rem;
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      margin:.3rem;
+      font-size:.96rem;
+      box-shadow:0 8px 24px rgba(15,23,42,.05);
+    }
+
+    html[data-bs-theme="dark"] .hero-stat{
+      background:rgba(17,24,39,.52);
+      border-color:rgba(148,163,184,.15);
+    }
+
+    .hero-stat i{color:var(--brand)}
+
+    .meta-line{margin-bottom:.78rem}
+    .footer-link{text-decoration:none}
+
+    .line-clamp-2{
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .line-clamp-3{
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .sticky-side{position:sticky;top:98px}
+
+    .browse-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      margin:.28rem;
+      padding:.62rem .88rem;
+      border:1px solid var(--bs-border-color);
+      border-radius:999px;
+      background:var(--bs-body-bg);
+      cursor:pointer;
+      transition:.18s ease;
+      font-weight:500;
+    }
+
+    .browse-chip:hover{
+      background:var(--bs-tertiary-bg);
+      transform:translateY(-1px);
+      border-color:rgba(31,94,255,.2);
+      color:var(--brand);
+    }
+
+    .home-grid-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .section-card-title{
+      font-size:1rem;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+
+    .section-heading{
+      font-size:clamp(1.5rem,3vw,2.2rem);
+      font-weight:800;
+      letter-spacing:-.03em;
+    }
+
+    .page-intro{
+      max-width:800px;
+      margin:0 auto 1.4rem;
+    }
+
+    .result-meta{font-size:.84rem}
+
+    .empty-state{
+      min-height:180px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-style:dashed;
+    }
+
+    .policy-list li{margin-bottom:.5rem}
+
+    .tag{
+      font-size:12px;
+      margin-right:6px;
+      padding:.42rem .62rem;
+      border-radius:999px;
+    }
+
+    .feature-icon{
+      width:56px;
+      height:56px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:linear-gradient(135deg, rgba(31,94,255,.12), rgba(24,183,160,.12));
+      color:var(--brand);
+      font-size:1.35rem;
+      margin-bottom:.9rem;
+      box-shadow:0 10px 24px rgba(31,94,255,.12);
+    }
+
+    .filter-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.38rem .76rem;
+      border-radius:999px;
+      background:var(--bs-tertiary-bg);
+      border:1px solid var(--bs-border-color);
+      font-size:.84rem;
+      margin:.15rem;
+    }
+
+    .about-image,
+    .hero-image,
+    .team-image{
+      width:100%;
+      border-radius:1.35rem;
+      object-fit:cover;
+      display:block;
+      box-shadow:var(--shadow-lg);
+    }
+
+    .hero-image{
+      min-height:340px;
+      max-height:450px;
+      border:1px solid rgba(255,255,255,.4);
+    }
+
+    .about-image{
+      min-height:370px;
+      max-height:430px;
+    }
+
+    .team-image{
+      height:230px;
+    }
+
+    .social-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.6rem;
+      padding:.95rem 1rem;
+      border-radius:1rem;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .social-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .topic-card .badge{
+      font-weight:600;
+    }
+
+    .topic-meta-top{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      align-items:flex-start;
+    }
+
+    .list-view .topic-card{
+      display:flex;
+      flex-direction:row;
+      gap:1rem;
+    }
+
+    .list-view .topic-main{flex:1}
+
+    .section-divider{
+      width:74px;
+      height:4px;
+      background:linear-gradient(90deg,var(--brand),var(--accent));
+      border-radius:999px;
+      margin:.65rem auto 0;
+    }
+
+    .footer-premium{
+      background:
+        radial-gradient(circle at top left, rgba(31,94,255,.16), transparent 28%),
+        linear-gradient(180deg,#08101f 0%, #0d1424 100%);
+      border-top:1px solid rgba(148,163,184,.12);
+    }
+
+    .footer-box{
+      border:1px solid rgba(148,163,184,.12);
+      border-radius:1.15rem;
+      padding:1.15rem;
+      background:rgba(255,255,255,.03);
+    }
+
+    .btn{
+      border-radius:.9rem;
+      font-weight:600;
+    }
+
+    .btn-lg{
+      padding:.9rem 1.15rem;
+    }
+
+    .form-control,.form-select{
+      border-radius:.9rem;
+      min-height:46px;
+      border-color:rgba(148,163,184,.24);
+    }
+
+    .form-control:focus,.form-select:focus{
+      box-shadow:0 0 0 .22rem rgba(31,94,255,.14);
+      border-color:rgba(31,94,255,.35);
+    }
+
+    .badge{
+      border-radius:999px;
+      padding:.55em .72em;
+    }
+
+    .breadcrumb{
+      background:transparent;
+      padding:0;
+      margin:0;
+    }
+
+    html[data-bs-theme="dark"] .text-secondary{color:#cbd5e1!important}
+    html[data-bs-theme="dark"] .text-muted{color:#cbd5e1!important}
+    html[data-bs-theme="dark"] .badge.text-bg-warning{color:#111827!important}
+
+    @media (max-width:991px){
+      .sticky-side{position:static}
+      .list-view .topic-card{display:block}
+      .navbar-brand{max-width:260px;font-size:.92rem}
+    }
+
+    @media (max-width:768px){
+      .hero{padding:72px 0 66px}
+      .hero-image{min-height:280px}
+      .filters-row>div{margin-bottom:10px}
+      .hero-title{font-size:2.1rem}
+    }
+
+.contact-icon{
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  font-size:18px;
+  background:#f1f5f9;
+  color:#0f172a;
+  text-decoration:none;
+  transition:all .3s ease;
+}
+
+.contact-icon:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Brand Colors */
+
+.contact-icon.whatsapp{
+  background:#25D366;
+  color:white;
+}
+
+.contact-icon.twitter{
+  background:#000;
+  color:white;
+}
+
+.contact-icon.facebook{
+  background:#1877F2;
+  color:white;
+}
+
+.contact-icon.linkedin{
+  background:#0A66C2;
+  color:white;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#" data-nav="home">Interns at Hammad Technologies – ProjectHelper</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center" id="mainNav">
+        <li class="nav-item"><a class="nav-link active" href="#" data-nav="home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-nav="topics">Topics</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-nav="about">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-nav="hireus">Hire Us</a></li>
+       
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+          <button class="btn btn-outline-light btn-sm" id="modeBtn" type="button">🌙 Dark</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id="home" class="section active hero">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7 text-lg-start text-center">
+        <span class="hero-badge mb-3">
+          <i class="bi bi-stars"></i> Professional Academic Repository
+        </span>
+
+        <h1 class="hero-title fw-bold mb-3">Discover Research Topics Across Nigerian Universities</h1>
+
+        <p class="hero-lead text-secondary mb-4">
+          Interns at Hammad Technologies – ProjectHelper is a professional academic discovery platform
+          built to help students explore project topics, theses, dissertations, seminar papers,
+          and research ideas across Nigerian universities in a clean and modern way.
+        </p>
+
+        <div class="row justify-content-center justify-content-lg-start g-2">
+          <div class="col-md-8 search-wrap">
+            <input id="globalSearch" class="form-control form-control-lg" placeholder="Search by title, university, faculty, department, keyword..." autocomplete="off">
+            <div id="suggestBox" class="search-suggest d-none"></div>
+          </div>
+          <div class="col-md-4 col-lg-3">
+            <button class="btn btn-primary btn-lg w-100" id="globalSearchBtn" type="button">
+              <i class="bi bi-search me-1"></i> Search
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <span class="hero-stat"><i class="bi bi-building"></i> <strong id="heroUniCount">0</strong> Universities</span>
+          <span class="hero-stat"><i class="bi bi-diagram-3"></i> <strong id="heroDeptCount">0</strong> Departments</span>
+          <span class="hero-stat"><i class="bi bi-journal-text"></i> <strong id="heroTopicCount">0</strong> Records</span>
+          <span class="hero-stat"><i class="bi bi-collection"></i> <strong id="heroTypeCount">0</strong> Document Types</span>
+        </div>
+
+        <div class="mt-4">
+          <small class="text-secondary">Quick categories:</small>
+          <div class="d-inline-block ms-2">
+            <button class="btn btn-sm btn-outline-primary me-1 mb-1" type="button" onclick="filterByTag('AI')">AI</button>
+            <button class="btn btn-sm btn-outline-success me-1 mb-1" type="button" onclick="filterByTag('Database')">Database</button>
+            <button class="btn btn-sm btn-outline-warning me-1 mb-1" type="button" onclick="filterByTag('Education')">Education</button>
+            <button class="btn btn-sm btn-outline-info me-1 mb-1" type="button" onclick="filterByTag('Healthcare')">Healthcare</button>
+            <button class="btn btn-sm btn-outline-dark me-1 mb-1" type="button" onclick="filterByTag('Agriculture')">Agriculture</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="glass-card p-2 rounded-4">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&q=80" 
+alt="Library books" class="img-fluid rounded shadow">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stats" class="section container mt-4">
+  <div class="row text-center g-3">
+    <div class="col-6 col-md-3">
+      <div class="stats-box stats-card premium-card">
+        <h3 class="mb-0" id="statSchools">0</h3>
+        <small class="muted">Universities</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="stats-box stats-card premium-card">
+        <h3 class="mb-0" id="statFaculties">0</h3>
+        <small class="muted">Faculties</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="stats-box stats-card premium-card">
+        <h3 class="mb-0" id="statDepartments">0</h3>
+        <small class="muted">Departments</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="stats-box stats-card premium-card">
+        <h3 class="mb-0" id="statTopics">0</h3>
+        <small class="muted">Records</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="homeBrowse" class="section container mt-5">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card p-4 feature-card premium-card">
+        <div class="home-grid-title mb-3">
+          <h5 class="mb-0 fw-bold">Browse by Region</h5>
+          <small class="muted">Direct academic discovery</small>
+        </div>
+        <div id="regionBrowse"></div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card p-4 feature-card premium-card h-100">
+        <h5 class="mb-3 fw-bold">Repository Highlights</h5>
+        <ul class="mb-0 text-secondary">
+          <li>Smart browsing by region, university, faculty, and department</li>
+          <li>Advanced academic topic filtering across Nigerian institutions</li>
+          <li>Structured topic previews for project inspiration and discovery</li>
+          <li>Professional research browsing experience for students and interns</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recentDocuments" class="section container mt-5">
+  <div class="row g-4">
+    <div class="col-md-6 col-xl-3">
+      <div class="card p-3 mini-card premium-card">
+        <div class="home-grid-title mb-2">
+          <div class="section-card-title">Recent Projects</div>
+          <a href="#" onclick="browseByType(event,'Project')">View all</a>
+        </div>
+        <div id="recentProjectsList"></div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card p-3 mini-card premium-card">
+        <div class="home-grid-title mb-2">
+          <div class="section-card-title">Recent Theses</div>
+          <a href="#" onclick="browseByType(event,'Thesis')">View all</a>
+        </div>
+        <div id="recentThesesList"></div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card p-3 mini-card premium-card">
+        <div class="home-grid-title mb-2">
+          <div class="section-card-title">Recent Seminars</div>
+          <a href="#" onclick="browseByType(event,'Seminar')">View all</a>
+        </div>
+        <div id="recentSeminarsList"></div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card p-3 mini-card premium-card">
+        <div class="home-grid-title mb-2">
+          <div class="section-card-title">Recent Research Papers</div>
+          <a href="#" onclick="browseByType(event,'Research Paper')">View all</a>
+        </div>
+        <div id="recentPapersList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="featuredUniversities" class="section container mt-5">
+  <div class="card p-4 premium-card">
+    <div class="home-grid-title mb-3">
+      <h5 class="mb-0 fw-bold">Featured Universities</h5>
+      <small class="muted">Across all six geopolitical zones</small>
+    </div>
+    <div id="featuredUniversityList" class="row g-3"></div>
+  </div>
+</section>
+
+<section id="policies" class="section container mt-5">
+  <div class="text-center mb-4">
+    <h2 class="section-heading">Why Use This Platform</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card p-4 h-100 feature-card premium-card">
+        <div class="feature-icon"><i class="bi bi-search"></i></div>
+        <h5 class="fw-bold">Search Guide</h5>
+        <ul class="policy-list text-secondary mb-0">
+          <li>Search by title, university, faculty, department, or keyword</li>
+          <li>Use region and university type filters for better discovery</li>
+          <li>Browse projects, theses, dissertations, and seminar topics</li>
+          <li>Preview topic details to refine your academic direction</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-4 h-100 feature-card premium-card">
+        <div class="feature-icon"><i class="bi bi-journal-richtext"></i></div>
+        <h5 class="fw-bold">Academic Discovery</h5>
+        <ul class="policy-list text-secondary mb-0">
+          <li>Explore organized topics from Nigerian universities</li>
+          <li>Discover ideas by faculty and department structure</li>
+          <li>Use the platform for inspiration and topic refinement</li>
+          <li>Support academic planning and research awareness</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-4 h-100 feature-card premium-card">
+        <div class="feature-icon"><i class="bi bi-lightbulb"></i></div>
+        <h5 class="fw-bold">Built for Innovation</h5>
+        <ul class="policy-list text-secondary mb-0">
+          <li>Designed to make topic discovery easier for students and interns</li>
+          <li>Promotes organized academic browsing and exploration</li>
+          <li>Encourages research innovation and digital learning</li>
+          <li>Simplifies access to structured academic information</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="filters" class="section container mt-5">
+  <div class="filter-panel premium-card">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+      <h5 class="mb-0 fw-bold">Advanced Search & Filters</h5>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-outline-secondary btn-sm" type="button" id="resetFiltersBtn">Reset filters</button>
+      </div>
+    </div>
+
+    <div class="row g-2 filters-row align-items-center">
+      <div class="col-md-3">
+        <input id="adv_title" class="form-control" placeholder="Title / Keywords / Department">
+      </div>
+      <div class="col-md-2">
+        <select id="adv_region" class="form-select"><option value="">All Regions</option></select>
+      </div>
+      <div class="col-md-2">
+        <select id="adv_uni_type" class="form-select"><option value="">All University Types</option></select>
+      </div>
+      <div class="col-md-3">
+        <select id="adv_school" class="form-select"><option value="">All Universities</option></select>
+      </div>
+      <div class="col-md-2">
+        <select id="adv_faculty" class="form-select"><option value="">All Faculties</option></select>
+      </div>
+      <div class="col-md-2">
+        <select id="adv_department" class="form-select"><option value="">All Departments</option></select>
+      </div>
+      <div class="col-md-2">
+        <select id="adv_level" class="form-select">
+          <option value="">All Levels</option>
+          <option>Undergraduate</option>
+          <option>Postgraduate</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select id="adv_type" class="form-select"><option value="">All Types</option></select>
+      </div>
+      <div class="col-md-2">
+        <select id="adv_access" class="form-select">
+          <option value="">All Access</option>
+          <option>Open Access</option>
+          <option>Restricted</option>
+          <option>Embargoed</option>
+        </select>
+      </div>
+      <div class="col-md-1">
+        <input id="adv_year" class="form-control" placeholder="Year">
+      </div>
+      <div class="col-md-2">
+        <select id="adv_sort" class="form-select">
+          <option value="new">Newest</option>
+          <option value="title">Title</option>
+        </select>
+      </div>
+      <div class="col-md-2 d-flex gap-2">
+        <button class="btn btn-primary w-100" type="button" id="applyFiltersBtn">Apply</button>
+      </div>
+    </div>
+
+    <div class="mt-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div id="activeFilterChips"></div>
+      <div class="d-flex gap-2 align-items-center">
+        <label for="resultView" class="small muted mb-0">View:</label>
+        <select id="resultView" class="form-select form-select-sm" style="width:auto">
+          <option value="grid">Grid</option>
+          <option value="list">List</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="topics" class="section container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+    <h5 class="m-0 fw-bold">Repository Records</h5>
+    <div><small class="muted">Showing <span id="topicsCount">0</span> results • <span id="topicsPagesCount">0</span> pages</small></div>
+  </div>
+  <div id="searchInfo" class="small text-secondary mb-3"></div>
+  <div id="loader" class="row g-3 mb-3 d-none">
+    <div class="col-md-4"><div class="skeleton p-3"></div></div>
+    <div class="col-md-4"><div class="skeleton p-3"></div></div>
+    <div class="col-md-4"><div class="skeleton p-3"></div></div>
+  </div>
+  <div id="topicsContainer" class="row g-3"></div>
+  <nav class="mt-4"><ul id="pagination" class="pagination"></ul></nav>
+</section>
+
+<section id="topicDetails" class="section container mt-5">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#" onclick="goNav(event,'home')">Home</a></li>
+      <li class="breadcrumb-item"><a href="#" onclick="goNav(event,'topics')">Topics</a></li>
+      <li class="breadcrumb-item active">Item Details</li>
+    </ol>
+  </nav>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+        <h3 id="detail_title" class="mb-0 fw-bold">Title</h3>
+        <div>
+          <span id="detail_type_badge" class="badge text-bg-warning me-1">Project</span>
+          <span id="detail_access_badge" class="badge text-bg-success">Open Access</span>
+        </div>
+      </div>
+
+      <p id="detail_abstract" class="muted"></p>
+
+      <div class="card p-4 mb-3 premium-card">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <h6 class="mb-0 fw-bold">Research Information</h6>
+        </div>
+        <div class="meta-line"><strong>University:</strong> <span id="meta_university"></span></div>
+        <div class="meta-line"><strong>University Type:</strong> <span id="meta_uni_type"></span></div>
+        <div class="meta-line"><strong>Region:</strong> <span id="meta_region"></span></div>
+        <div class="meta-line"><strong>Faculty:</strong> <span id="meta_faculty"></span></div>
+        <div class="meta-line"><strong>Department:</strong> <span id="meta_department"></span></div>
+        <div class="meta-line"><strong>Publication Year:</strong> <span id="meta_year"></span></div>
+        <div class="meta-line"><strong>Level:</strong> <span id="meta_level"></span></div>
+        <div class="meta-line"><strong>Document Type:</strong> <span id="meta_type"></span></div>
+        <div class="meta-line"><strong>Language:</strong> <span id="meta_language"></span></div>
+        <div class="meta-line"><strong>Access Rights:</strong> <span id="meta_access"></span></div>
+        <div class="meta-line"><strong>Status:</strong> <span id="meta_status"></span></div>
+        <div class="meta-line"><strong>Keywords:</strong> <span id="meta_keywords"></span></div>
+      </div>
+
+      <div id="detail_tags" class="mb-3"></div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="sticky-side">
+        <div class="card p-4 mb-3 premium-card">
+          <h6 class="mb-2 fw-bold">Related Topics</h6>
+          <ul id="relatedList" class="list-unstyled mb-0"></ul>
+        </div>
+
+        <div class="card p-4 premium-card">
+          <h6 class="mb-2 fw-bold">Helpful Note</h6>
+          <p class="text-secondary mb-0 small">
+            This platform is designed for topic discovery, academic browsing, and research inspiration.
+            Use the search filters to refine your results by region, university, faculty, department, or document type.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="universities" class="section container mt-5">
+  <div class="text-center page-intro">
+    <h2 class="section-heading">Browse Nigerian Universities</h2>
+    <p class="text-secondary">Explore Federal, State, and Private universities across Nigeria.</p>
+    <div class="section-divider"></div>
+  </div>
+  <div class="card p-4 premium-card">
+    <div id="universitiesContainer" class="row g-3"></div>
+  </div>
+</section>
+
+<section id="faculties" class="section container mt-5">
+  <div class="text-center page-intro">
+    <h2 class="section-heading">Browse Faculties</h2>
+    <p class="text-secondary">Explore academic faculties and discover related research topics.</p>
+    <div class="section-divider"></div>
+  </div>
+  <div class="card p-4 premium-card">
+    <div id="facultiesContainer" class="row g-3"></div>
+  </div>
+</section>
+
+<section id="departments" class="section container mt-5">
+  <div class="text-center page-intro">
+    <h2 class="section-heading">Browse Departments</h2>
+    <p class="text-secondary">Search by department across universities and academic disciplines.</p>
+    <div class="section-divider"></div>
+  </div>
+  <div class="card p-4 premium-card">
+    <div id="departmentsContainer" class="row g-3"></div>
+  </div>
+</section>
+
+<section id="about" class="section container mt-5">
+  <div class="row g-4 align-items-center">
+    <div class="col-lg-6">
+      <img
+        src="IMAGE1.JPG"
+        class="about-image"
+        alt="Interns at Hammad Technologies"
+      >
+    </div>
+
+    <div class="col-lg-6">
+      <span class="hero-badge mb-3"><i class="bi bi-people"></i> About ProjectHelper</span>
+      <h2 class="section-heading">Interns at Hammad Technologies – ProjectHelper</h2>
+      <p class="text-secondary">
+        ProjectHelper is a professional academic discovery platform developed by
+        Interns at Hammad Technologies to help students explore project topics,
+        theses, dissertations, seminar papers, and research ideas from Nigerian universities.
+      </p>
+      <p class="text-secondary">
+        We built this platform to make academic topic discovery easier, faster, and more organized.
+        Students can search by university, faculty, department, region, and document type.
+      </p>
+      <p class="text-secondary mb-0">
+        Our goal is to support research, innovation, digital learning, and academic growth across Nigeria.
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-2">
+    <div class="col-md-6">
+      <div class="card p-4 h-100 premium-card">
+        <div class="feature-icon"><i class="bi bi-bullseye"></i></div>
+        <h5 class="fw-bold">Our Mission</h5>
+        <p class="text-secondary mb-0">
+          To simplify academic research discovery for students by providing a clean
+          and searchable platform for exploring research topics and project ideas.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card p-4 h-100 premium-card">
+        <div class="feature-icon"><i class="bi bi-lightbulb"></i></div>
+        <h5 class="fw-bold">Our Goal</h5>
+        <p class="text-secondary mb-0">
+          To build a trusted digital platform that promotes academic innovation,
+          project inspiration, and access to organized research information across Nigerian universities.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <div class="text-center mb-4">
+      <h2 class="section-heading">Meet the Interns at Hammad Technologies</h2>
+      <p class="text-secondary">A growing team building digital solutions, academic tools, and research platforms.</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card p-3 h-100 text-center premium-card">
+          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&q=80" 
+        alt="Books on table" class="img-fluid rounded shadow">
+         <h5 class="mb-1 fw-bold">Projects & Theses</h5>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 h-100 text-center premium-card">
+          <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200&q=80" 
+alt="Open book reading" class="img-fluid rounded shadow">
+          <h5 class="mb-1 fw-bold">Seminars & Papers Research</h5>
+          
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 h-100 text-center premium-card">
+         <img src="https://images.unsplash.com/photo-1455885661740-29cbf08a42fa?w=1200&q=80" 
+alt="Reading a book" class="img-fluid rounded shadow">
+          <h5 class="mb-1 fw-bold">Dissertations</h5>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hireus" class="section container mt-5">
+  <div class="card p-4 premium-card">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7">
+        <span class="hero-badge mb-3"><i class="bi bi-briefcase"></i> Hire Us</span>
+        <h2 class="section-heading">Work with Interns at Hammad Technologies</h2>
+        <p class="text-secondary">
+          We provide professional support in project topic selection, research assistance,
+          academic formatting, web development, programming, and data analysis.
+        </p>
+
+        <div class="row g-3 mt-2">
+          <div class="col-md-6">
+            <div class="stats-box premium-card">
+              <i class="bi bi-journal-richtext me-2"></i> Project Topic Guidance
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="stats-box premium-card">
+              <i class="bi bi-code-slash me-2"></i> Programming Projects
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="stats-box premium-card">
+              <i class="bi bi-graph-up-arrow me-2"></i> Data Analysis
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="stats-box premium-card">
+              <i class="bi bi-file-earmark-text me-2"></i> Research Support
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="contact-box premium-card">
+          <h5 class="mb-3 fw-bold">Quick Contact</h5>
+          <div class="d-grid gap-2">
+            <a href="mailto:najibualiyu112@gmail.com" class="btn btn-danger">
+              <i class="bi bi-envelope-fill me-2"></i>Email Us
+            </a>
+            <a href="tel:+2348028151367" class="btn btn-success">
+              <i class="bi bi-telephone-fill me-2"></i>Call +234 802 815 1367
+            </a>
+            <a href="tel:+2347065405876" class="btn btn-outline-success">
+              <i class="bi bi-telephone-forward-fill me-2"></i>Call +234 706 540 5876
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section container mt-5">
+  <div class="card p-4 premium-card">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <h2 class="section-heading">Contact Us</h2>
+        <p class="text-secondary">
+          Reach out to Interns at Hammad Technologies for academic, research, and digital solutions support.
+        </p>
+
+        <div class="mb-3">
+          <div class="fw-semibold"><i class="bi bi-person-fill me-2"></i>Name</div>
+          <div class="text-secondary">Najibu Aliyu</div>
+        </div>
+
+        <div class="mb-3">
+          <div class="fw-semibold"><i class="bi bi-briefcase-fill me-2"></i>Position</div>
+          <div class="text-secondary">Intern At Hammad Technologies</div>
+        </div>
+
+        <div class="mb-3">
+          <div class="fw-semibold"><i class="bi bi-envelope-fill me-2"></i>Email</div>
+          <a href="mailto:najibualiyu112@gmail.com">najibualiyu112@gmail.com</a>
+        </div>
+
+        <div class="mb-3">
+          <div class="fw-semibold"><i class="bi bi-telephone-fill me-2"></i>Phone Numbers</div>
+          <div><a href="tel:+2348028151367">+234 802 815 1367</a></div>
+          <div><a href="tel:+2347065405876">+234 706 540 5876</a></div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h5 class="mb-3 fw-bold">Connect on Social Media</h5>
+        <div class="d-grid gap-2">
+          <a href="https://x.com/AliyuNajib3964" target="_blank" class="btn btn-dark social-btn">
+            <i class="bi bi-twitter-x"></i> X / Twitter
+          </a>
+          <a href="https://web.facebook.com/profile.php?id=100089691913270" target="_blank" class="btn btn-primary social-btn">
+            <i class="bi bi-facebook"></i> Facebook
+          </a>
+          <a href="https://www.linkedin.com/in/najibu-aliyu-58902a393/" target="_blank" class="btn btn-info text-white social-btn">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-premium text-white mt-5 py-4" data-bs-theme="dark">
+
+  <div class="container">
+
+    <div class="row justify-content-center text-center">
+
+      <div class="col-lg-6">
+
+        <h5 class="mb-3 fw-bold">Connect With Us</h5>
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+
+          <!-- Email -->
+          <a href="mailto:najibualiyu112@gmail.com"
+             class="contact-icon"
+             title="najibualiyu112@gmail.com">
+            <i class="bi bi-envelope-fill"></i>
+          </a>
+
+          <!-- Phone -->
+          <a href="tel:+2348028151367"
+             class="contact-icon"
+             title="+234 802 815 1367">
+            <i class="bi bi-telephone-fill"></i>
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/2347065405876"
+             target="_blank"
+             class="contact-icon whatsapp">
+            <i class="bi bi-whatsapp"></i>
+          </a>
+
+          <!-- Twitter -->
+          <a href="https://x.com/AliyuNajib3964"
+             target="_blank"
+             class="contact-icon twitter">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+
+          <!-- Facebook -->
+          <a href="https://web.facebook.com/profile.php?id=100089691913270"
+             target="_blank"
+             class="contact-icon facebook">
+            <i class="bi bi-facebook"></i>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/najibu-aliyu-58902a393/"
+             target="_blank"
+             class="contact-icon linkedin">
+            <i class="bi bi-linkedin"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<button id="topBtn" class="btn btn-primary" title="Back to top" type="button" onclick="scrollToTopPage()">↑</button>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastMsg">Action done</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DOCUMENT_TYPES = ['Project','Thesis','Dissertation','Seminar','Research Paper'];
+
+const UNIVERSITY_GROUPS = {
+  'North West':[
+    {name:'Ahmadu Bello University',type:'Federal'},
+    {name:'Bayero University Kano',type:'Federal'},
+    {name:'Usmanu Danfodiyo University Sokoto',type:'Federal'},
+    {name:'Federal University Dutse',type:'Federal'},
+    {name:'Federal University Dutsin-Ma',type:'Federal'},
+    {name:'Federal University Gusau',type:'Federal'},
+    {name:'Federal University Birnin Kebbi',type:'Federal'},
+    {name:'Kaduna State University',type:'State'},
+    {name:'Kebbi State University of Science and Technology Aliero',type:'State'},
+    {name:'Kano University of Science and Technology Wudil',type:'State'},
+    {name:"Umaru Musa Yar'adua University",type:'State'},
+    {name:'Yusuf Maitama Sule University Kano',type:'State'},
+    {name:'Al-Qalam University Katsina',type:'Private'}
+  ],
+  'North East':[
+    {name:'University of Maiduguri',type:'Federal'},
+    {name:'Abubakar Tafawa Balewa University',type:'Federal'},
+    {name:'Federal University Kashere',type:'Federal'},
+    {name:'Federal University Gashua',type:'Federal'},
+    {name:'Federal University Wukari',type:'Federal'},
+    {name:'Taraba State University',type:'State'},
+    {name:'Adamawa State University',type:'State'},
+    {name:'Gombe State University',type:'State'},
+    {name:'Borno State University',type:'State'},
+    {name:'Modibbo Adama University',type:'Federal'},
+    {name:'American University of Nigeria',type:'Private'}
+  ],
+  'North Central':[
+    {name:'University of Abuja',type:'Federal'},
+    {name:'University of Ilorin',type:'Federal'},
+    {name:'University of Jos',type:'Federal'},
+    {name:'Federal University Lokoja',type:'Federal'},
+    {name:'Federal University Lafia',type:'Federal'},
+    {name:'Federal University of Technology Minna',type:'Federal'},
+    {name:'Nasarawa State University',type:'State'},
+    {name:'Benue State University',type:'State'},
+    {name:'Prince Abubakar Audu University',type:'State'},
+    {name:'Ibrahim Badamasi Babangida University',type:'State'},
+    {name:'Nile University of Nigeria',type:'Private'},
+    {name:'Bingham University',type:'Private'},
+    {name:'African University of Science and Technology',type:'Private'}
+  ],
+  'South West':[
+    {name:'University of Ibadan',type:'Federal'},
+    {name:'University of Lagos',type:'Federal'},
+    {name:'Obafemi Awolowo University',type:'Federal'},
+    {name:'Federal University Oye-Ekiti',type:'Federal'},
+    {name:'Lagos State University',type:'State'},
+    {name:'Ekiti State University',type:'State'},
+    {name:'Olabisi Onabanjo University',type:'State'},
+    {name:'Adekunle Ajasin University',type:'State'},
+    {name:'Osun State University',type:'State'},
+    {name:'University of Medical Sciences Ondo',type:'State'},
+    {name:'Covenant University',type:'Private'},
+    {name:'Babcock University',type:'Private'},
+    {name:'Bowen University',type:'Private'},
+    {name:'Afe Babalola University',type:'Private'}
+  ],
+  'South East':[
+    {name:'University of Nigeria Nsukka',type:'Federal'},
+    {name:'Nnamdi Azikiwe University',type:'Federal'},
+    {name:'Alex Ekwueme Federal University Ndufu-Alike',type:'Federal'},
+    {name:'Federal University of Technology Owerri',type:'Federal'},
+    {name:'Abia State University',type:'State'},
+    {name:'Ebonyi State University',type:'State'},
+    {name:'Enugu State University of Science and Technology',type:'State'},
+    {name:'Imo State University',type:'State'},
+    {name:'Chukwuemeka Odumegwu Ojukwu University',type:'State'},
+    {name:'Madonna University',type:'Private'},
+    {name:'Gregory University',type:'Private'}
+  ],
+  'South South':[
+    {name:'University of Port Harcourt',type:'Federal'},
+    {name:'University of Benin',type:'Federal'},
+    {name:'Federal University of Petroleum Resources Effurun',type:'Federal'},
+    {name:'University of Uyo',type:'Federal'},
+    {name:'University of Calabar',type:'Federal'},
+    {name:'Delta State University Abraka',type:'State'},
+    {name:'Rivers State University',type:'State'},
+    {name:'Niger Delta University',type:'State'},
+    {name:'Cross River University of Technology',type:'State'},
+    {name:'Akwa Ibom State University',type:'State'},
+    {name:'Igbinedion University',type:'Private'},
+    {name:'Pan-Atlantic University',type:'Private'}
+  ]
+};
+
+const FACULTY_DEPARTMENTS = {
+  'Computer & IT':['Computer Science','Software Engineering','Information Technology','Cyber Security','Data Science','Information Systems'],
+  'Engineering':['Civil Engineering','Mechanical Engineering','Electrical Engineering','Chemical Engineering','Petroleum Engineering','Agricultural Engineering'],
+  'Science':['Mathematics','Physics','Chemistry','Biochemistry','Microbiology','Biology'],
+  'Management':['Accounting','Business Administration','Public Administration','Banking and Finance','Marketing','Entrepreneurship'],
+  'Education':['Educational Management','Science Education','Computer Education','Guidance and Counselling','Adult Education','Library and Information Science'],
+  'Arts':['English Language','History and International Studies','Linguistics','Theatre Arts','Philosophy','Religious Studies'],
+  'Social Sciences':['Economics','Political Science','Sociology','Geography','Mass Communication','Psychology'],
+  'Agriculture':['Agronomy','Animal Science','Soil Science','Crop Science','Fisheries','Agricultural Economics'],
+  'Law':['Private and Property Law','Public Law','Commercial Law','International Law','Islamic Law','Jurisprudence'],
+  'Medicine':['Medicine and Surgery','Nursing Science','Medical Laboratory Science','Public Health','Physiology','Anatomy'],
+  'Environmental Sciences':['Architecture','Building','Estate Management','Urban and Regional Planning','Quantity Surveying','Surveying and Geoinformatics'],
+  'Pharmacy':['Pharmacology','Clinical Pharmacy','Pharmaceutical Chemistry','Pharmaceutics','Pharmacognosy','Pharmacy Practice']
+};
+
+const TAGS_POOL = ['AI','Database','Web','Automation','Security','Education','Healthcare','Mobile','Networks','Agriculture','Finance','Research','Policy','Digital'];
+const SUBJECTS = [
+  'Online Admission Screening Queueing Management System',
+  'Library Management System',
+  'Hospital Management Information System',
+  'E-Learning Platform',
+  'Student Result Processing System',
+  'Blockchain Voting System',
+  'Inventory Management System',
+  'Attendance Monitoring System',
+  'Loan Management System',
+  'Soil Fertility Management',
+  'Malaria Prevention',
+  'Small Business Performance',
+  'Public Revenue Generation',
+  'Smart Irrigation System',
+  'Waste Management',
+  'Telemedicine Platform',
+  'Transport Scheduling',
+  'School Fee Payment Portal',
+  'Crime Reporting System',
+  'Digital Repository System',
+  'Employee Performance Tracking',
+  'Climate Data Analysis',
+  'Community Health Education',
+  'Land Information System',
+  'Drug Inventory Platform'
+];
+
+const ACCESS_RIGHTS = ['Open Access','Restricted','Embargoed'];
+
+const SPECIFIC_BY_DEPARTMENT = {
+  'Computer Science':['Design and Implementation of {x}','Machine Learning Approach to {x}','Secure {x} with Role-Based Access Control','Cloud-Enabled {x}'],
+  'Software Engineering':['Agile-Based Development of {x}','Design, Testing and Deployment of {x}','Microservice Architecture for {x}','Quality Assurance Framework for {x}'],
+  'Information Technology':['ICT-Based Solution for {x}','Deployment Strategy for {x}','Improving Digital Service Delivery for {x}','Scalable Platform for {x}'],
+  'Cyber Security':['Risk Assessment Model for {x}','Intrusion Detection for {x}','Multi-Factor Authentication for {x}','Cybersecurity Awareness Study on {x}'],
+  'Data Science':['Predictive Analytics for {x}','Data-Driven Decision Support for {x}','Visualization Model for {x}','Classification of {x} using Machine Learning'],
+  'Accounting':['Financial Reporting Analysis of {x}','Internal Control Assessment in {x}','Impact of Digital Accounting Systems on {x}','Budgetary Control in {x}'],
+  'Economics':['Economic Analysis of {x}','Determinants of {x}','Impact of Inflation on {x}','Time Series Study of {x}'],
+  'Mass Communication':['Social Media Influence on {x}','Audience Perception of {x}','Communication Strategies for {x}','Media Framing of {x}'],
+  'Public Health':['Assessment of {x}','Knowledge, Attitude and Practice of {x}','Determinants of {x}','Prevalence of {x}'],
+  'Agronomy':['Effect of {x} on Crop Yield','Comparative Study of {x}','Assessment of Farmer Adoption of {x}','Impact of Soil Factors on {x}']
+};
+
+const GENERIC_BY_TYPE = {
+  'Project':['Design and Implementation of {x}','Development of {x}','Analysis and Development of {x}','A Web-Based {x}'],
+  'Thesis':['Assessment of {x}','A Comparative Study of {x}','Determinants of {x}','Modeling {x} in Nigerian Institutions'],
+  'Dissertation':['An Empirical Investigation of {x}','Evaluation of {x}','Impact of {x}','Framework for Improving {x}'],
+  'Seminar':['Overview of {x}','Seminar on {x}','Current Trends in {x}','Challenges and Prospects of {x}'],
+  'Research Paper':['A Study on {x}','A Survey of {x}','Research Paper on {x}','Investigating {x}']
+};
+
+const REGION_OPTIONS = Object.keys(UNIVERSITY_GROUPS);
+const SCHOOLS = Object.entries(UNIVERSITY_GROUPS).flatMap(([region, schools]) => schools.map(s => ({name:s.name, region, type:s.type})));
+const FACULTIES = Object.keys(FACULTY_DEPARTMENTS);
+const DEPARTMENTS = [...new Set(Object.values(FACULTY_DEPARTMENTS).flat())].sort();
+const UNIVERSITY_TYPES = [...new Set(SCHOOLS.map(s => s.type))];
+
+let TOPICS = [];
+let TOPIC_LOOKUP = new Map();
+
+function createSlug(value){
+  return String(value || '').toLowerCase().trim().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-');
+}
+
+function makeAbstract(title, department, university, type){
+  return `This ${type.toLowerCase()} examines ${title.toLowerCase()} within the context of ${department} at ${university}. The work focuses on the background of the study, relevant literature, methodology, practical findings, and the academic value of the topic in Nigeria. It is designed to support research inspiration, topic refinement, and informed project development for students and researchers.`;
+}
+
+function generateTitle(department, type, subject, index){
+  const templates = SPECIFIC_BY_DEPARTMENT[department] || GENERIC_BY_TYPE[type] || ['A Study of {x}'];
+  return templates[index % templates.length].replace('{x}', subject);
+}
+
+function generateTopics(){
+  let id = 1;
+  SCHOOLS.forEach((school, schoolIndex) => {
+    FACULTIES.forEach((faculty, facultyIndex) => {
+      const deptList = FACULTY_DEPARTMENTS[faculty] || [];
+      deptList.forEach((department, deptIndex) => {
+        for(let i = 0; i < 4; i++){
+          const type = DOCUMENT_TYPES[(id + i + deptIndex) % DOCUMENT_TYPES.length];
+          const subject = SUBJECTS[(schoolIndex * 7 + facultyIndex * 5 + deptIndex * 3 + i) % SUBJECTS.length];
+          const title = generateTitle(department, type, subject, i);
+          const year = 2016 + ((id + facultyIndex + deptIndex) % 10);
+          const level = type === 'Project' || type === 'Seminar' ? 'Undergraduate' : 'Postgraduate';
+          const tags = [...new Set([department.split(' ')[0], TAGS_POOL[id % TAGS_POOL.length], TAGS_POOL[(id + 5) % TAGS_POOL.length]])];
+          const keywords = [...new Set([department, faculty, school.region, school.type, type, ...tags])];
+          const accessRights = ACCESS_RIGHTS[id % ACCESS_RIGHTS.length];
+
+          const topic = {
+            id,
+            title,
+            slug:createSlug(title),
+            abstract:makeAbstract(title, department, school.name, type),
+            department,
+            faculty,
+            university:school.name,
+            region:school.region,
+            universityType:school.type,
+            year,
+            level,
+            type,
+            keywords,
+            language:'English',
+            accessRights,
+            status:'Published',
+            tags
+          };
+
+          TOPICS.push(topic);
+          TOPIC_LOOKUP.set(id, topic);
+          id++;
+        }
+      });
+    });
+  });
+}
+
+generateTopics();
+
+const state = {
+  page:1,
+  perPage:12,
+  filteredTopics:TOPICS.slice().sort((a,b)=>b.year-a.year || b.id-a.id),
+  currentTopic:null
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  applySavedTheme();
+  initUI();
+  attachEvents();
+  navigate('home');
+  handleHashOnLoad();
+});
+
+function initUI(){
+  const schoolSel = document.getElementById('adv_school');
+  const facultySel = document.getElementById('adv_faculty');
+  const deptSel = document.getElementById('adv_department');
+  const regionSel = document.getElementById('adv_region');
+  const uniTypeSel = document.getElementById('adv_uni_type');
+  const docTypeSel = document.getElementById('adv_type');
+
+  REGION_OPTIONS.forEach(r => regionSel.insertAdjacentHTML('beforeend', `<option value="${escapeAttribute(r)}">${escapeHtml(r)}</option>`));
+  UNIVERSITY_TYPES.forEach(t => uniTypeSel.insertAdjacentHTML('beforeend', `<option value="${escapeAttribute(t)}">${escapeHtml(t)}</option>`));
+  DOCUMENT_TYPES.forEach(t => docTypeSel.insertAdjacentHTML('beforeend', `<option value="${escapeAttribute(t)}">${escapeHtml(t)}</option>`));
+
+  SCHOOLS.slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(s => {
+    schoolSel.insertAdjacentHTML('beforeend', `<option value="${escapeAttribute(s.name)}">${escapeHtml(s.name)}</option>`);
+  });
+
+  FACULTIES.forEach(f => {
+    facultySel.insertAdjacentHTML('beforeend', `<option value="${escapeAttribute(f)}">${escapeHtml(f)}</option>`);
+  });
+
+  DEPARTMENTS.forEach(d => {
+    deptSel.insertAdjacentHTML('beforeend', `<option value="${escapeAttribute(d)}">${escapeHtml(d)}</option>`);
+  });
+
+  document.getElementById('statSchools').innerText = SCHOOLS.length + '+';
+  document.getElementById('statFaculties').innerText = FACULTIES.length;
+  document.getElementById('statDepartments').innerText = DEPARTMENTS.length + '+';
+  document.getElementById('statTopics').innerText = TOPICS.length.toLocaleString() + '+';
+
+  document.getElementById('heroUniCount').innerText = SCHOOLS.length;
+  document.getElementById('heroDeptCount').innerText = DEPARTMENTS.length;
+  document.getElementById('heroTopicCount').innerText = TOPICS.length.toLocaleString();
+  document.getElementById('heroTypeCount').innerText = DOCUMENT_TYPES.length;
+
+  renderRegionBrowse();
+  renderRecentSections();
+  renderFeaturedUniversities();
+  renderUniversitiesPage();
+  renderFacultiesPage();
+  renderDepartmentsPage();
+  setupAutocomplete();
+  renderTopics();
+  updateTopicsCount();
+  updateThemeButtonLabel();
+}
+
+function attachEvents(){
+  document.querySelectorAll('[data-nav]').forEach(link => link.addEventListener('click', e => {
+    e.preventDefault();
+    navigate(link.dataset.nav);
+  }));
+
+  document.getElementById('globalSearchBtn').addEventListener('click', doGlobalSearch);
+  document.getElementById('applyFiltersBtn').addEventListener('click', () => {
+    applyFilters();
+    navigate('topics');
+  });
+  document.getElementById('resetFiltersBtn').addEventListener('click', resetFilters);
+  document.getElementById('resultView').addEventListener('change', renderTopics);
+  document.getElementById('globalSearch').addEventListener('keydown', e => {
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      doGlobalSearch();
+    }
+  });
+  document.getElementById('adv_title').addEventListener('keydown', e => {
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      applyFilters();
+      navigate('topics');
+    }
+  });
+  document.getElementById('adv_region').addEventListener('change', syncSchoolsByRegionAndType);
+  document.getElementById('adv_uni_type').addEventListener('change', syncSchoolsByRegionAndType);
+  document.getElementById('adv_faculty').addEventListener('change', syncDepartmentsByFaculty);
+  document.getElementById('modeBtn').addEventListener('click', toggleTheme);
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('topBtn').style.display = document.documentElement.scrollTop > 250 ? 'block' : 'none';
+  });
+
+  window.addEventListener('hashchange', handleHashOnLoad);
+}
+
+function setActiveNav(section){
+  document.querySelectorAll('#mainNav .nav-link').forEach(link => {
+    link.classList.toggle('active', link.dataset.nav === section);
+  });
+}
+
+function renderRegionBrowse(){
+  const el = document.getElementById('regionBrowse');
+  el.innerHTML = REGION_OPTIONS.map(region => `
+    <button class="browse-chip" type="button" onclick="browseByRegion('${escapeJs(region)}')">
+      <i class="bi bi-geo-alt"></i> ${escapeHtml(region)} <span class="muted">(${SCHOOLS.filter(s => s.region===region).length})</span>
+    </button>
+  `).join(' ');
+}
+
+function renderFeaturedUniversities(){
+  const el = document.getElementById('featuredUniversityList');
+  const featured = SCHOOLS.slice(0,12);
+  el.innerHTML = featured.map(s => `
+    <div class="col-md-6 col-xl-4">
+      <div class="card p-3 h-100 mini-card premium-card">
+        <div class="fw-semibold">${escapeHtml(s.name)}</div>
+        <div class="small text-secondary">${escapeHtml(s.region)} • ${escapeHtml(s.type)}</div>
+        <div class="mt-3">
+          <button class="btn btn-sm btn-outline-primary" type="button" onclick="browseByUniversity('${escapeJs(s.name)}')">
+            <i class="bi bi-arrow-right-circle me-1"></i> Browse topics
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderRecentSections(){
+  renderRecentTypeList('Project','recentProjectsList');
+  renderRecentTypeList('Thesis','recentThesesList');
+  renderRecentTypeList('Seminar','recentSeminarsList');
+  renderRecentTypeList('Research Paper','recentPapersList');
+}
+
+function renderRecentTypeList(type, elementId){
+  const el = document.getElementById(elementId);
+  const items = TOPICS.filter(t => t.type === type).sort((a,b)=>b.year-a.year || b.id-a.id).slice(0,4);
+  el.innerHTML = items.map(t => `
+    <div class="mb-3">
+      <a href="#" onclick="openTopicLink(event,${t.id})" class="fw-semibold d-block line-clamp-2">${escapeHtml(t.title)}</a>
+      <div class="result-meta text-secondary">${escapeHtml(t.university)} • ${t.year}</div>
+    </div>
+  `).join('');
+}
+
+function renderUniversitiesPage(){
+  const el = document.getElementById('universitiesContainer');
+  if(!el) return;
+  el.innerHTML = SCHOOLS.slice().sort((a,b) => a.name.localeCompare(b.name)).map(s => `
+    <div class="col-md-6 col-xl-4">
+      <div class="card p-3 h-100 section-tile premium-card">
+        <div class="fw-semibold">${escapeHtml(s.name)}</div>
+        <div class="small text-secondary mb-2">${escapeHtml(s.region)} • ${escapeHtml(s.type)}</div>
+        <button class="btn btn-sm btn-outline-primary" type="button" onclick="browseByUniversity('${escapeJs(s.name)}')">
+          <i class="bi bi-arrow-right-circle me-1"></i> Browse Topics
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderFacultiesPage(){
+  const el = document.getElementById('facultiesContainer');
+  if(!el) return;
+  el.innerHTML = FACULTIES.map(f => `
+    <div class="col-md-6 col-xl-4">
+      <div class="card p-3 h-100 section-tile premium-card">
+        <div class="fw-semibold">${escapeHtml(f)}</div>
+        <div class="small text-secondary mb-2">${(FACULTY_DEPARTMENTS[f] || []).length} departments</div>
+        <button class="btn btn-sm btn-outline-primary" type="button" onclick="browseByFaculty('${escapeJs(f)}')">
+          <i class="bi bi-arrow-right-circle me-1"></i> View Topics
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderDepartmentsPage(){
+  const el = document.getElementById('departmentsContainer');
+  if(!el) return;
+  el.innerHTML = DEPARTMENTS.map(d => `
+    <div class="col-md-6 col-xl-4">
+      <div class="card p-3 h-100 section-tile premium-card">
+        <div class="fw-semibold">${escapeHtml(d)}</div>
+        <button class="btn btn-sm btn-outline-primary mt-2" type="button" onclick="browseByDepartment('${escapeJs(d)}')">
+          <i class="bi bi-arrow-right-circle me-1"></i> View Topics
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function syncSchoolsByRegionAndType(){
+  const region = document.getElementById('adv_region').value;
+  const uniType = document.getElementById('adv_uni_type').value;
+  const schoolSel = document.getElementById('adv_school');
+  schoolSel.innerHTML = '<option value="">All Universities</option>';
+
+  SCHOOLS.filter(s => (!region || s.region === region) && (!uniType || s.type === uniType))
+    .sort((a,b)=>a.name.localeCompare(b.name))
+    .forEach(s => schoolSel.insertAdjacentHTML('beforeend', `<option value="${escapeAttribute(s.name)}">${escapeHtml(s.name)}</option>`));
+}
+
+function syncDepartmentsByFaculty(){
+  const faculty = document.getElementById('adv_faculty').value;
+  const deptSel = document.getElementById('adv_department');
+  deptSel.innerHTML = '<option value="">All Departments</option>';
+  const list = faculty ? (FACULTY_DEPARTMENTS[faculty] || []) : DEPARTMENTS;
+  list.forEach(d => deptSel.insertAdjacentHTML('beforeend', `<option value="${escapeAttribute(d)}">${escapeHtml(d)}</option>`));
+}
+
+function navigate(section){
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  setActiveNav(section === 'topicDetails' ? 'topics' : section);
+
+  if(section === 'home'){
+    ['home','stats','homeBrowse','recentDocuments','featuredUniversities','policies'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.classList.add('active');
+    });
+    return;
+  }
+
+  const target = document.getElementById(section);
+  if(target) target.classList.add('active');
+
+  if(section === 'topics'){
+    ['filters','topics','stats'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.classList.add('active');
+    });
+    renderTopics();
+  }
+
+  if(section === 'universities') renderUniversitiesPage();
+  if(section === 'faculties') renderFacultiesPage();
+  if(section === 'departments') renderDepartmentsPage();
+}
+
+function goNav(event, section){
+  event.preventDefault();
+  navigate(section);
+}
+
+function openTopicLink(event,id){
+  event.preventDefault();
+  viewTopic(id);
+}
+
+function browseByRegion(region){
+  document.getElementById('adv_region').value = region;
+  syncSchoolsByRegionAndType();
+  applyFilters();
+  navigate('topics');
+}
+
+function browseByType(event, type){
+  if(event) event.preventDefault();
+  document.getElementById('adv_type').value = type;
+  applyFilters();
+  navigate('topics');
+}
+
+function browseByUniversity(name){
+  document.getElementById('adv_school').value = name;
+  applyFilters();
+  navigate('topics');
+}
+
+function browseByFaculty(faculty){
+  document.getElementById('adv_faculty').value = faculty;
+  syncDepartmentsByFaculty();
+  applyFilters();
+  navigate('topics');
+}
+
+function browseByDepartment(department){
+  document.getElementById('adv_department').value = department;
+  applyFilters();
+  navigate('topics');
+}
+
+function setupAutocomplete(){
+  const input = document.getElementById('globalSearch');
+  const box = document.getElementById('suggestBox');
+
+  input.addEventListener('input', debounce(function(){
+    const q = input.value.trim().toLowerCase();
+    if(!q){
+      box.classList.add('d-none');
+      box.innerHTML = '';
+      return;
+    }
+
+    const suggestions = TOPICS.filter(t =>
+      t.title.toLowerCase().includes(q) ||
+      t.department.toLowerCase().includes(q) ||
+      t.faculty.toLowerCase().includes(q) ||
+      t.university.toLowerCase().includes(q) ||
+      t.keywords.some(k => k.toLowerCase().includes(q))
+    ).slice(0,8);
+
+    if(!suggestions.length){
+      box.classList.add('d-none');
+      box.innerHTML = '';
+      return;
+    }
+
+    box.classList.remove('d-none');
+    box.innerHTML = suggestions.map(s => `
+      <div class="p-3 suggestion" style="cursor:pointer" onclick="selectSuggestion(${s.id})">
+        <div class="fw-semibold">${escapeHtml(s.title)}</div>
+        <div class="text-secondary small">${escapeHtml(s.university)} • ${escapeHtml(s.department)} • ${escapeHtml(s.type)}</div>
+      </div>
+    `).join('');
+  }, 180));
+
+  document.addEventListener('click', e => {
+    if(!box.contains(e.target) && e.target !== input){
+      box.classList.add('d-none');
+    }
+  });
+}
+
+function selectSuggestion(id){
+  document.getElementById('suggestBox').classList.add('d-none');
+  viewTopic(id);
+}
+
+function doGlobalSearch(){
+  const q = document.getElementById('globalSearch').value.trim().toLowerCase();
+  document.getElementById('adv_title').value = document.getElementById('globalSearch').value.trim();
+  applyFilters({ title:q });
+  navigate('topics');
+}
+
+function getActiveFilters(){
+  return {
+    title:document.getElementById('adv_title').value.trim().toLowerCase(),
+    region:document.getElementById('adv_region').value,
+    uniType:document.getElementById('adv_uni_type').value,
+    school:document.getElementById('adv_school').value,
+    faculty:document.getElementById('adv_faculty').value,
+    department:document.getElementById('adv_department').value,
+    level:document.getElementById('adv_level').value,
+    type:document.getElementById('adv_type').value,
+    access:document.getElementById('adv_access').value,
+    year:document.getElementById('adv_year').value.trim(),
+    sort:document.getElementById('adv_sort').value
+  };
+}
+
+function applyFilters(extra = {}){
+  document.getElementById('loader').classList.remove('d-none');
+  const filters = getActiveFilters();
+  const title = extra.title !== undefined ? extra.title : filters.title;
+
+  let list = TOPICS.filter(t => {
+    const matchesTitle = !title ||
+      t.title.toLowerCase().includes(title) ||
+      t.abstract.toLowerCase().includes(title) ||
+      t.department.toLowerCase().includes(title) ||
+      t.faculty.toLowerCase().includes(title) ||
+      t.university.toLowerCase().includes(title) ||
+      t.tags.some(tag => tag.toLowerCase().includes(title)) ||
+      t.keywords.some(keyword => keyword.toLowerCase().includes(title));
+
+    return matchesTitle &&
+      (!filters.region || t.region === filters.region) &&
+      (!filters.uniType || t.universityType === filters.uniType) &&
+      (!filters.school || t.university === filters.school) &&
+      (!filters.faculty || t.faculty === filters.faculty) &&
+      (!filters.department || t.department === filters.department) &&
+      (!filters.level || t.level === filters.level) &&
+      (!filters.type || t.type === filters.type) &&
+      (!filters.access || t.accessRights === filters.access) &&
+      (!filters.year || String(t.year) === filters.year);
+  });
+
+  if(filters.sort === 'title') list.sort((a,b)=>a.title.localeCompare(b.title));
+  else list.sort((a,b)=>b.year-a.year || b.id-a.id);
+
+  state.filteredTopics = list;
+  state.page = 1;
+
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('d-none');
+    renderTopics();
+  }, 180);
+}
+
+function renderFilterChips(){
+  const filters = getActiveFilters();
+  const entries = [
+    ['Search', filters.title],
+    ['Region', filters.region],
+    ['University Type', filters.uniType],
+    ['University', filters.school],
+    ['Faculty', filters.faculty],
+    ['Department', filters.department],
+    ['Level', filters.level],
+    ['Type', filters.type],
+    ['Access', filters.access],
+    ['Year', filters.year]
+  ].filter(([,v]) => v);
+
+  document.getElementById('activeFilterChips').innerHTML = entries.map(([k,v]) => `
+    <span class="filter-chip">${escapeHtml(k)}: ${escapeHtml(v)}</span>
+  `).join('');
+}
+
+function resetFilters(){
+  ['adv_title','adv_region','adv_uni_type','adv_school','adv_faculty','adv_department','adv_level','adv_type','adv_access','adv_year']
+    .forEach(id => document.getElementById(id).value = '');
+
+  document.getElementById('adv_sort').value = 'new';
+  syncSchoolsByRegionAndType();
+  syncDepartmentsByFaculty();
+  state.filteredTopics = TOPICS.slice().sort((a,b)=>b.year-a.year || b.id-a.id);
+  state.page = 1;
+  renderTopics();
+  showToast('Filters reset');
+}
+
+function renderTopics(){
+  const container = document.getElementById('topicsContainer');
+  const list = state.filteredTopics;
+  const pages = Math.max(1, Math.ceil(list.length / state.perPage));
+  if(state.page > pages) state.page = pages;
+
+  const start = (state.page - 1) * state.perPage;
+  const pageItems = list.slice(start, start + state.perPage);
+
+  updateTopicsCount(pages);
+  renderFilterChips();
+  container.innerHTML = '';
+
+  if(document.getElementById('resultView').value === 'list') container.classList.add('list-view');
+  else container.classList.remove('list-view');
+
+  if(!pageItems.length){
+    container.innerHTML = '<div class="col-12"><div class="card p-4 text-center empty-state">No results found. Try changing filters.</div></div>';
+    renderPagination(pages);
+    return;
+  }
+
+  pageItems.forEach(t => {
+    container.insertAdjacentHTML('beforeend', `
+      <div class="col-md-6 col-xl-4">
+        <div class="card topic-card p-3 h-100 premium-card">
+          <div class="topic-main">
+            <div class="topic-meta-top">
+              <div>
+                <h6 class="mb-1 fw-bold">${escapeHtml(t.title)}</h6>
+                <div class="small muted mb-2">${escapeHtml(t.university)} • ${escapeHtml(t.department)}</div>
+              </div>
+              <div class="text-end">
+                <span class="badge text-bg-light border">${escapeHtml(t.region)}</span><br>
+                <span class="badge text-bg-secondary mt-1">${escapeHtml(t.universityType)}</span>
+              </div>
+            </div>
+
+            <div class="small text-secondary mb-2">${t.year} • ${escapeHtml(t.type)} • ${escapeHtml(t.level)}</div>
+            <p class="muted small line-clamp-3">${escapeHtml(t.abstract)}</p>
+
+            <div class="mt-auto d-flex justify-content-between align-items-center flex-wrap gap-2">
+              <div>
+                ${t.tags.map(tag => `<span class="badge text-bg-secondary tag">${escapeHtml(tag)}</span>`).join(' ')}
+              </div>
+              <div>
+                <button class="btn btn-sm btn-outline-primary" type="button" onclick="viewTopic(${t.id})">
+                  <i class="bi bi-eye me-1"></i> View
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `);
+  });
+
+  renderPagination(pages);
+}
+
+function renderPagination(pages){
+  const el = document.getElementById('pagination');
+  const current = state.page;
+  el.innerHTML = '';
+
+  el.insertAdjacentHTML('beforeend', `<li class="page-item ${current===1 ? 'disabled' : ''}"><a class="page-link" href="#" onclick="changePage(event, ${current-1})">Prev</a></li>`);
+
+  const start = Math.max(1, current - 2);
+  const end = Math.min(pages, current + 2);
+
+  for(let i = start; i <= end; i++){
+    el.insertAdjacentHTML('beforeend', `<li class="page-item ${i===current ? 'active' : ''}"><a class="page-link" href="#" onclick="changePage(event, ${i})">${i}</a></li>`);
+  }
+
+  el.insertAdjacentHTML('beforeend', `<li class="page-item ${current===pages ? 'disabled' : ''}"><a class="page-link" href="#" onclick="changePage(event, ${current+1})">Next</a></li>`);
+}
+
+function changePage(event, page){
+  event.preventDefault();
+  const pages = Math.max(1, Math.ceil(state.filteredTopics.length / state.perPage));
+  state.page = Math.min(Math.max(page,1), pages);
+  renderTopics();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function viewTopic(id){
+  const t = TOPIC_LOOKUP.get(id);
+  if(!t) return;
+
+  state.currentTopic = t;
+
+  document.getElementById('detail_title').innerText = t.title;
+  document.getElementById('detail_abstract').innerText = t.abstract;
+  document.getElementById('meta_university').innerText = t.university;
+  document.getElementById('meta_uni_type').innerText = t.universityType;
+  document.getElementById('meta_region').innerText = t.region;
+  document.getElementById('meta_faculty').innerText = t.faculty;
+  document.getElementById('meta_department').innerText = t.department;
+  document.getElementById('meta_year').innerText = t.year;
+  document.getElementById('meta_level').innerText = t.level;
+  document.getElementById('meta_type').innerText = t.type;
+  document.getElementById('meta_language').innerText = t.language;
+  document.getElementById('meta_access').innerText = t.accessRights;
+  document.getElementById('meta_status').innerText = t.status;
+  document.getElementById('meta_keywords').innerText = t.keywords.join(', ');
+  document.getElementById('detail_type_badge').innerText = t.type;
+  document.getElementById('detail_access_badge').innerText = t.accessRights;
+  document.getElementById('detail_tags').innerHTML = t.tags.map(tag => `<span class="badge text-bg-info tag">${escapeHtml(tag)}</span>`).join(' ');
+
+  const related = TOPICS.filter(x => x.department === t.department && x.id !== t.id).slice(0,5);
+  document.getElementById('relatedList').innerHTML = related.map(r => `<li class="mb-2"><a href="#" onclick="openRelated(event, ${r.id})">${escapeHtml(r.title)}</a></li>`).join('') || '<li class="muted">No related records.</li>';
+
+  navigate('topicDetails');
+  location.hash = `topic-${t.id}`;
+}
+
+function openRelated(event, id){
+  event.preventDefault();
+  viewTopic(id);
+}
+
+function updateTopicsCount(pages = Math.max(1, Math.ceil(state.filteredTopics.length / state.perPage))){
+  document.getElementById('topicsCount').innerText = state.filteredTopics.length.toLocaleString();
+  document.getElementById('topicsPagesCount').innerText = pages.toLocaleString();
+  const q = document.getElementById('adv_title').value.trim();
+  document.getElementById('searchInfo').innerText = q
+    ? `Search results for "${q}"`
+    : 'Browse by region, university type, faculty, department, level, document type, and access rights.';
+}
+
+function filterByTag(tag){
+  document.getElementById('adv_title').value = tag;
+  applyFilters({title:tag.toLowerCase()});
+  navigate('topics');
+}
+
+function scrollToTopPage(){
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function debounce(fn, wait=200){
+  let timer;
+  return function(...args){
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this,args), wait);
+  };
+}
+
+function escapeHtml(str=''){
+  return String(str)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function escapeAttribute(str=''){
+  return escapeHtml(str);
+}
+
+function escapeJs(str=''){
+  return String(str).replaceAll('\\','\\\\').replaceAll("'","\\'");
+}
+
+function showToast(msg){
+  document.getElementById('toastMsg').innerText = msg;
+  bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToast')).show();
+}
+
+function applySavedTheme(){
+  const savedTheme = localStorage.getItem('ph_theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const finalTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-bs-theme', finalTheme);
+}
+
+function toggleTheme(){
+  const current = document.documentElement.getAttribute('data-bs-theme') || 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-bs-theme', next);
+  localStorage.setItem('ph_theme', next);
+  updateThemeButtonLabel();
+  showToast(`Switched to ${next} mode`);
+}
+
+function updateThemeButtonLabel(){
+  const mode = document.documentElement.getAttribute('data-bs-theme') || 'light';
+  document.getElementById('modeBtn').innerText = mode === 'dark' ? '☀️ Light' : '🌙 Dark';
+}
+
+function handleHashOnLoad(){
+  const hash = location.hash;
+  if(hash.startsWith('#topic-')){
+    const id = parseInt(hash.replace('#topic-',''), 10);
+    if(!Number.isNaN(id)) viewTopic(id);
+  }
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
